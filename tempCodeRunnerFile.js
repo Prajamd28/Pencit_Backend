@@ -1,5 +1,10 @@
 require("dotenv").config({path: "./backend/.env"});
 
+const path = require('path');
+console.log("Current directory:", __dirname);
+console.log("ENV file path:", path.join(__dirname, '.env'));
+console.log("Environment variables:", process.env);
+
 const config = require("./config.json");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
@@ -8,7 +13,7 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const upload = require("./multer");
 const fs = require("fs");
-const path = require('path');
+
 
 const { authenticateToken } = require("./utilities");
 
@@ -258,7 +263,7 @@ app.post("/login", login);
 app.get("/get-user", authenticateToken, getUser);
 app.post("/caption", authenticateToken, postCaption);
 app.get("/get-caption", authenticateToken, getCaption);
-app.post("/image-upload", upload.single("image"), uploadImage);
+app.get("/image-upload", upload.single("image"), uploadImage);
 
 
 // check endpoint
